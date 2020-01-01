@@ -6,7 +6,14 @@ const Intcode = fs.readFileSync('inputs/day2.txt')
     .split(",") //?
     .map(i => parseInt(i));
 
-Intcode[1] = 12;
-Intcode[2] = 2;
-const p = new IntcodeProgram(Intcode).execute();
-console.log(p.code[0]);
+
+for (let noun = 0; noun < 100; noun ++){
+    for (let verb = 0; verb < 100; verb ++){
+        Intcode[1] = noun;
+        Intcode[2] = verb;
+        const p = new IntcodeProgram(Intcode).execute();
+        if (p.memory[0] == 19690720) {
+            console.log(noun, verb, 100 * noun + verb)
+        }
+    }
+}
