@@ -13,7 +13,7 @@ for (let noun = 0; noun < 100; noun ++){
         Intcode[2] = verb;
         const p = new IntcodeProgram(Intcode).execute();
         if (p.memory[0] == 19690720) {
-            console.log(noun, verb, 100 * noun + verb)
+            console.log(noun, verb, 100 * noun + verb);
         }
     }
 }
