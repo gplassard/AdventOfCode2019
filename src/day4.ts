@@ -7,14 +7,18 @@ export function isValidPassword(number: number): boolean {
     }
     const offBy1 = ["", ...Array.from(asString)]
 
-    const countSameNeighbors = _.zip(offBy1, Array.from(asString))
+    const sameNeighbors = _.zip(offBy1, Array.from(asString))
         .filter(([left, right]) => left === right)
-        .length
+        .map(([left]) => left)
+
+    const hasValidAdjacent = Object.entries(_.groupBy(sameNeighbors, a => a))
+        .map(([digit, digits]) => digits.length)
+        .some((length) => length == 1)
 
     const hasDecrease = _.zip(Array.from(asString), offBy1)
         .some(([left, right]) => parseInt(left!) < parseInt(right!))
 
-    return countSameNeighbors > 0 && !hasDecrease
+    return hasValidAdjacent && !hasDecrease
 }
 
 const min = 367479
